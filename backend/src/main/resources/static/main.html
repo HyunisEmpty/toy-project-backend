@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Memo App</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>Memo App</h1>
+
+        <h3 id="welcome"></h3>
+
+        <button onclick="logout()">
+
+            로그아웃
+
+        </button>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>메모 작성</h2>
+
+        <label>제목</label>
+
+        <input id="title">
+
+        <label>내용</label>
+
+        <textarea
+                id="content"
+                rows="5">
+        </textarea>
+
+        <button onclick="createMemo()">
+
+            메모 저장
+
+        </button>
+
+    </div>
+
+    <br>
+
+    <div class="card">
+
+        <h2>내 메모</h2>
+
+        <div id="memoList">
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+
+<script src="js/main.js"></script>
+
+</body>
+
+</html>

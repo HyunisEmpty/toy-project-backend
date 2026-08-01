@@ -52,7 +52,7 @@ public class MemoService {
 
     public List<MemoResponse> getAllMemos() {
 
-        List<Memo> memos = memoRepository.findAll();
+        List<Memo> memos = memoRepository.findAllWithUser();
 
         return memos.stream()
                 .map(memo -> new MemoResponse(

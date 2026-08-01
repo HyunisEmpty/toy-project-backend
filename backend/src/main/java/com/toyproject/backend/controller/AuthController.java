@@ -2,6 +2,8 @@ package com.toyproject.backend.controller;
 
 import com.toyproject.backend.dto.auth.SignupRequest;
 import com.toyproject.backend.dto.auth.SignupResponse;
+import com.toyproject.backend.dto.auth.LoginRequest;
+import com.toyproject.backend.dto.auth.LoginResponse;
 import com.toyproject.backend.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,5 +32,13 @@ public class AuthController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(response);
+    }
+
+    // 클라이언트 요청을 받아 Service에 전달하고, Service의 결과를 다시 응답하는 것
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request){
+        LoginResponse response = authService.login(request);
+
+        return ResponseEntity.ok(response);
     }
 }

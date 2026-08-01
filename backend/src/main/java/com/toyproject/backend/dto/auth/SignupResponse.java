@@ -1,10 +1,10 @@
 package com.toyproject.backend.dto.auth;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor
+@AllArgsConstructor
 public class SignupResponse {
     private String message;
 }

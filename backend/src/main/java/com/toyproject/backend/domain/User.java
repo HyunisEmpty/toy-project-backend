@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 // DB 테이블과 매핑되는 클래스를 명시하는 어노테이션
 @Getter
 @NoArgsConstructor
+@Table(name = "User")
 public class User {
 
     // id를 PK로 설정및 DB에서 auto-increment
@@ -23,19 +24,13 @@ public class User {
     @Column(nullable = false, length = 255)
     private String password;
 
-    // 자바 필드(카멜) -> DB 필드(스네이크) name 매핑
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    // DB에 저장되기 직전에 자동으로 해당 메서드 실행
-    @PrePersist
-    protected void onCreate(){
-        this.createdAt = LocalDateTime.now();
-    }
-
+    // User 클래스 생성자
     public User(String username, String password){
         this.username = username;
         this.password = password;
+        this.createdAt = LocalDateTime.now();
     }
-
 }

@@ -23,6 +23,11 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
+
+                .headers(headers ->
+                        headers.frameOptions(frame -> frame.disable())
+                )
+
                 // 세션 만들지 말라고 요청
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -37,7 +42,8 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/js/**",
                                 "/api/auth/signup",
-                                "/api/auth/login"
+                                "/api/auth/login",
+                                "/h2-console/**"
                         ).permitAll()
 
                         .anyRequest().authenticated()

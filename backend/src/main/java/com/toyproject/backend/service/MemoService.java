@@ -30,6 +30,7 @@ public class MemoService {
                 savedMemo.getId(),
                 savedMemo.getTitle(),
                 savedMemo.getContent(),
+                memo.getUser().getUsername(),
                 savedMemo.getCreatedAt()
         );
     }
@@ -43,6 +44,22 @@ public class MemoService {
                         memo.getId(),
                         memo.getTitle(),
                         memo.getContent(),
+                        memo.getUser().getUsername(),
+                        memo.getCreatedAt()
+                ))
+                .toList();
+    }
+
+    public List<MemoResponse> getAllMemos() {
+
+        List<Memo> memos = memoRepository.findAll();
+
+        return memos.stream()
+                .map(memo -> new MemoResponse(
+                        memo.getId(),
+                        memo.getTitle(),
+                        memo.getContent(),
+                        memo.getUser().getUsername(),
                         memo.getCreatedAt()
                 ))
                 .toList();

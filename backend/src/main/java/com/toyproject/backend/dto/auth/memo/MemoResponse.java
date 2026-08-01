@@ -15,6 +15,8 @@ public class MemoResponse {
 
     private String content;
 
+    private String writer;
+
     private LocalDateTime createdAt;
 
 }

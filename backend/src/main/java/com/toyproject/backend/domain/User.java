@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 // DB 테이블과 매핑되는 클래스를 명시하는 어노테이션
 @Getter
 @NoArgsConstructor
-@Table(name = "User")
+@Table(name = "users")
 public class User {
 
     // id를 PK로 설정및 DB에서 auto-increment

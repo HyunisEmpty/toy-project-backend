@@ -1,8 +1,18 @@
 window.onload = async () => {
 
+    if (!getToken()) {
+
+        location.href = "/login.html";
+
+        return;
+
+    }
+
     await loadUser();
 
     await loadMemos();
+
+    await loadAllMemos();
 
 };
 
@@ -65,6 +75,49 @@ async function loadMemos() {
 
 }
 
+async function loadAllMemos() {
+
+    try {
+
+        const memos = await api("/api/memos/all", "GET");
+
+        const memoList = document.getElementById("allMemoList");
+
+        memoList.innerHTML = "";
+
+        if (memos.length === 0) {
+
+            memoList.innerHTML = "<p>등록된 메모가 없습니다.</p>";
+
+            return;
+
+        }
+
+        memos.forEach(memo => {
+
+            const card = document.createElement("div");
+
+            card.className = "memo-card";
+
+            card.innerHTML = `
+                <h3>${memo.title}</h3>
+                <p>${memo.content}</p>
+                <p><strong>작성자 :</strong> ${memo.writer}</p>
+                <small>${memo.createdAt}</small>
+            `;
+
+            memoList.appendChild(card);
+
+        });
+
+    } catch (e) {
+
+        alert(e.message);
+
+    }
+
+}
+
 async function createMemo() {
 
     const title = document.getElementById("title").value.trim();
@@ -103,9 +156,9 @@ async function createMemo() {
 
         await loadMemos();
 
-    }
+        await loadAllMemos();
 
-    catch (e) {
+    } catch (e) {
 
         alert(e.message);
 
@@ -113,17 +166,10 @@ async function createMemo() {
 
 }
 
-window.onload = async () => {
+function logout() {
 
-    if (!getToken()) {
+    removeToken();
 
-        location.href = "/login.html";
+    location.href = "/login.html";
 
-        return;
-    }
-
-    await loadUser();
-
-    await loadMemos();
-
-};
+}

@@ -45,4 +45,12 @@ public class MemoController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MemoResponse>> getAllMemos() {
+
+        List<MemoResponse> response = memoService.getAllMemos();
+
+        return ResponseEntity.ok(response);
+    }
 }

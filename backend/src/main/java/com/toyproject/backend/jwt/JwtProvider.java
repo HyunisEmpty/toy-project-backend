@@ -1,5 +1,6 @@
 package com.toyproject.backend.jwt;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -30,7 +31,7 @@ public class JwtProvider {
         secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    // 로그인 성공시 호출되는 함수
+    // 로그인 성공시 호출되는 함수 -> JWT 생성
     public String createToken(Long userId, String username) {
 
         Date now = new Date();
@@ -44,6 +45,34 @@ public class JwtProvider {
                 .expiration(expireDate)
                 .signWith(secretKey)
                 .compact();
+    }
+
+    // JWT 검증 함수 -> 위조, 만료 확인
+    public boolean validateToken(String token) {
+
+        try {
+            Jwts.parser()
+                    .verifyWith(secretKey)
+                    .build()
+                    .parseSignedClaims(token);
+
+            return true;
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    // username 추출 하는 함수
+    public String getUsername(String token) {
+
+        Claims claims = Jwts.parser()
+                .verifyWith(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+
+        return claims.getSubject();
     }
 
 }

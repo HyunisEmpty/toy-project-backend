@@ -25,7 +25,8 @@ public class SecurityConfig {
                                 "/main.html",
                                 "/css/**",
                                 "/js/**",
-                                "/api/auth/signup"
+                                "/api/auth/signup",
+                                "/api/auth/login"
                         ).permitAll()
 
                         .anyRequest().authenticated()

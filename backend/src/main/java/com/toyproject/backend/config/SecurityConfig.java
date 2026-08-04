@@ -52,7 +52,7 @@ public class SecurityConfig {
                 .formLogin(form -> form.disable())
 
                 .httpBasic(httpBasic -> httpBasic.disable())
-                // jwtAuthenticationFilter가 기본 인증 Filter보다 우선 실행되도록 설정
+                // jwtAuthenticationFilter가 기본 인증 Filter보다 우선 실행되도록 설정 -> 필터 체인 등록
                 .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
